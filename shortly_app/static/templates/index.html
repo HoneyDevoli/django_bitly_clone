@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Django urls</title>
+    {% load static %}
+    {% load bootstrap4 %}
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+    <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <h1 class="mt-2">Django urls</h1>
+          <hr class="mt-0 mb-4">
+          {% block content %}
+            <form action="" method="POST">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% buttons submit='OK' %}{% endbuttons %}
+            </form>
+
+            {% if short_url %}
+              <label> Созданное сокращение: <a href="{{ short_url }}" target="_blank">{{ host }}/{{ short_url }}</a> </label>
+            {% endif %}
+
+            {% include '_links_pagination.html' with items=items %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>
