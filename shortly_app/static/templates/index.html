@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Django urls</title>
     {% load static %}
     {% load bootstrap4 %}
@@ -10,31 +10,31 @@
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     {% bootstrap_messages %}
-    <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
-  </head>
-  <body>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-8">
-          <h1 class="mt-2">Django urls</h1>
-          <hr class="mt-0 mb-4">
-          {% block content %}
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-5">
+            <h1 class="mt-2">Django urls</h1>
+            <hr class="mt-0 mb-4">
+            {% block content %}
             <form action="" method="POST">
-              {% csrf_token %}
-              {% bootstrap_form form %}
-              {% buttons submit='OK' %}{% endbuttons %}
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons submit='OK' %}{% endbuttons %}
             </form>
 
             {% if short_url %}
-              <label> Созданное сокращение: <a href="{{ short_url }}" target="_blank">{{ host }}/{{ short_url }}</a> </label>
+            <label> Созданное сокращение: <a href="{{ short_url }}" target="_blank">{{ host }}/{{ short_url }}</a>
+            </label>
             {% endif %}
 
-            {% include '_links_pagination.html' with items=items %}
-          {% endblock %}
+            {% endblock %}
         </div>
-      </div>
+        <div class="col-12">
+            {% include '_links_pagination.html' with items=items %}
+        </div>
     </div>
-
-
-  </body>
+</div>
+</body>
 </html>

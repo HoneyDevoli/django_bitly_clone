@@ -1,50 +1,35 @@
 <h2>Your link list</h2>
-<div id="shorten_actions" >
-  <ul class="list-group" id="most_recent_links">
-    <li class="list-group-item " id="link">
-
-      {% for item in items %}
-
-        <div class="row">
-          {{ item.pk }}
-          {% if item.url|length > 60 %}
-            <span class="long-link column">{{ item.url|truncatechars:60 }}</span>
-          {% endif %}
-          {% if item.url|length <= 60 %}
-            <span class="long-link column">{{ item.url }}</span>
-          {% endif %}
-          <span>
-            <span class="short-link column">
-              <a href="{{ item.subpart }}" target="_blank">{{ host }}/{{ item.subpart }}</a>
-            </span>
-            <span class="copy column">
-              <button class="button button-secondary">Copy</button>
-            </span>
-          </span>
-        </div>
-
-      {% endfor %}
-    </li>
- </ul>
+<div id="shorten_actions">
+    <ul class="list-group" id="most_recent_links">
+        {% for item in items %}
+            <li class="list-group-item " id="link">
+                <div class="d-flex align-items-center">
+                    {{ item.pk }}
+                    <span class="text-truncate">{{ item.url }}</span>
+                    <a class="ml-auto justify-self-end" href="{{ item.subpart }}" target="_blank">{{ host }}/{{ item.subpart }}</a>
+                    <button class="ml-2 btn btn-sm btn-secondary">Copy</button>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 
 {% if items.paginator.num_pages > 1 %}
 
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      {% if items.has_previous %}
+<nav class="d-flex align-item-center justify-content-center mt-3">
+    <ul class="pagination">
+        {% if items.has_previous %}
         <li class="page-item">
-          <a class="page-link" tabindex="-1" href="?page={{ items.previous_page_number }}">Previous</a>
+            <a class="page-link" tabindex="-1" href="?page={{ items.previous_page_number }}">Previous</a>
         </li>
-      {% endif %}
-
-      <li class="page-item"><a class="page-link" href="#">{{ items.number }}</a></li>
+        {% endif %}
+        <li class="page-item"><a class="page-link" href="#">{{ items.number }}</a></li>
         {% if items.has_next %}
-          <li class="page-item">
+        <li class="page-item">
             <a class="page-link" href="?page={{ items.next_page_number }}">Next</a>
-          </li>
+        </li>
         {% endif %}
     </ul>
-  </nav>
+</nav>
 
 {% endif %}
