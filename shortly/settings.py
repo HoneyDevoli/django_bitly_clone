@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import pymysql
+pymysql.version_info = (1, 3, 13, "final", 0)
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shortly_app.apps.ShortlyAppConfig',
+    'django_extensions',
+    'rest_framework',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -55,8 +61,7 @@ ROOT_URLCONF = 'shortly.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'shortly_app/static/templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,10 +84,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'url_db',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '3306',
+        'default-character-set': 'utf8_bin',
     }
 }
 
@@ -119,8 +125,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+LENGTH_SUBPART = 5
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

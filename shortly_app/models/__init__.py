@@ -1,1 +1,1 @@
-from .ShortUrl import ShortUrl
+from .Link import Link
