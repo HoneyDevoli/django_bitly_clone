@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm, SlugField, URLField
+from django.forms import ModelForm, SlugField
 
 from ..models import Link
 
