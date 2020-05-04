@@ -6,8 +6,8 @@ from django.conf import settings
 
 
 class Link(models.Model):
-    url = models.URLField(max_length=4048, help_text='Ссылка для сжатия')
-    subpart = models.SlugField(help_text='введите желаемую часть ссылки', max_length=settings.LENGTH_SUBPART, null=True)
+    url = models.URLField(max_length=4048, help_text='Сompression link')
+    subpart = models.SlugField(help_text='Enter the desired part of the link', max_length=settings.LENGTH_SUBPART, null=True)
     create_date = models.DateField(auto_now_add=True)
 
     def __str__(self):

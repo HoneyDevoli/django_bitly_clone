@@ -15,6 +15,6 @@ class LinkCreateForm(ModelForm):
         subpart = self.cleaned_data.get('subpart', '')
         if subpart:
             if not Link.is_unique_subpart(subpart):
-                raise ValidationError('Выбранное вами сокращение URL уже занято.')
+                raise ValidationError('URL abbreviation of your choice is already taken')
 
         return subpart

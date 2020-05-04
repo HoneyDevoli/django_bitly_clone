@@ -28,7 +28,7 @@ SECRET_KEY = '5m8c9_)m560_j_y%e3-5d70row#0pxqnvbd@-+7dijh0p(g6*p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shortly_app.apps.ShortlyAppConfig',
     'django_extensions',
-    'rest_framework',
     'bootstrap4',
 ]
 
@@ -83,15 +82,18 @@ WSGI_APPLICATION = 'shortly.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'url_db',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'NAME': 'testp',
+        'USER': 'testp',
+        'PASSWORD': 'testp',
+        'HOST': 'db',
         'PORT': '3306',
         'default-character-set': 'utf8_bin',
     }
 }
 
+REDIS_HOST = 'REDIS'
+REDIS_PORT = '6379'
+REDIS_CACHE_TIMEOUT_HOURS = 24
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -126,7 +128,7 @@ USE_L10N = True
 USE_TZ = True
 
 SESSION_SAVE_EVERY_REQUEST = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 LENGTH_SUBPART = 5
 
@@ -137,3 +139,36 @@ LENGTH_SUBPART = 5
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s <%(module)s> %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': './debug.log',
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['file', 'console'],
+            'level':  'DEBUG',
+        },
+        '': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+        }
+    },
+}
