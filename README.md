@@ -22,7 +22,7 @@ Mandatory requirements:
 
 First you need run command
 ```
-$ docker-compise up -d --build
+$ docker-compose up -d --build
 ```
 
 Then for create tables in database
